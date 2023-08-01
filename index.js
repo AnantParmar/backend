@@ -8,7 +8,7 @@ app.use(cookieParser());
  app.use(bodyParser.urlencoded({ extended: false }))
 //  app.use(cors())
  app.use(cors({
-  origin: 'https://jigarii-frontend.vercel.app'
+  origin: '*'
 }));
  app.use('/profile', express.static('upload/img'));
  app.get('/', (req, res)=>{
