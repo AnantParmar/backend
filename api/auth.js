@@ -121,6 +121,7 @@ router.post('/login', async (req, res)=>{
             else {
                 res.cookie("sessionID", '', { expires: new Date(0), httpOnly: true });
                 res.cookie("result","cookieRemoved", {httpOnly:true})
+                res.cookie("sessionId",sessionId, {httpOnly:true});
             }
 
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
