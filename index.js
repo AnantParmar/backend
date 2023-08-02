@@ -11,7 +11,7 @@ app.use(cookieParser());
   origin: '*'
 }));
 app.use(cors({
-  origin: '*', // Replace with your frontend URL
+  origin: 'http://localhost:3000', // Replace with your frontend URL
   credentials: true, // Allow sending cookies with the request (if needed)
 }));
  app.use('/profile', express.static('upload/img'));
