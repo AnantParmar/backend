@@ -124,9 +124,9 @@ router.post('/login', async (req, res)=>{
             return res.send({result :false ,msg:"The email is not verified yet."})
         }
         else {
-            // const customToken = await admin.auth().createCustomToken(response.user.uid);
+            const customToken = await admin.auth().createCustomToken(response.user.uid);
             // console.log(customToken)
-            // res.cookie("sessionId",customToken, {httpOnly:true});
+            res.cookie("sessionId",customToken, {httpOnly:true});
 
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
             const quote = await getDocs(q1);
