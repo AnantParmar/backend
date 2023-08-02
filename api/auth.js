@@ -106,7 +106,7 @@ router.post('/login', async (req, res)=>{
     const email = req.body.username;
     const password = req.body.password;
     
-    var cookie = req.cookies[sessionId];
+    var cookie = req.cookies.sessionId;
     console.log(cookie)
     signInWithEmailAndPassword(auth, email, password)
     .then(async (response) => {
