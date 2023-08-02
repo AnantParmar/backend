@@ -9,7 +9,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
 router.post('/addQuote', async (req,res) => {
-    res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app/")
+    res.setHeader("Access-Control-Allow-Origin","*")
     const docId  = await addDoc(collection(db, "quotes"), {
         tag: req.body.quoteTag,
         quote: req.body.quote,
@@ -24,7 +24,7 @@ const getQuote = async (docId)=>{
     return docSnap.data();
 }
 router.put('/updateLikeCount', async (req,res) => {
-    res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app/")
+    res.setHeader("Access-Control-Allow-Origin","*")
     const data = await getQuote(req.body.docId);
     if(req.body.val>0) {
         const docId  = await addDoc(collection(db, "likedByUser"), {
@@ -74,7 +74,7 @@ const getQuotes = async (querySnapshot)=>{
     return responseArr;
 }
 router.get('/getQuotes', async (req,res) => {
-    res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app/")
+    res.setHeader("Access-Control-Allow-Origin","*")
     const querySnapshot = await getDocs(collection(db, "quotes"));
     getQuotes(querySnapshot)
     .then((responseArr)=>{
