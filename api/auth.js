@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-// const path = require('path');
+const path = require('path');
 const {signInWithEmailAndPassword,createUserWithEmailAndPassword,updateProfile,sendEmailVerification} = require('firebase/auth')
 const {setDoc,collection,doc,query,getDocs,where} = require('firebase/firestore');
 const { ref, getDownloadURL, uploadBytesResumable } = require('firebase/storage');
@@ -11,13 +11,13 @@ const cookieParser = require("cookie-parser")
 const crypto = require("crypto");
 router.use(cookieParser());
 const admin = require('firebase-admin');
-
+require('dotenv').config();
 // Initialize the Firebase Admin SDK with your service account credentials
-// const serviceAccount = require('../path/to/serviceAccountKey.json');
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-//   // Optional: You can set other configuration options here
-// });
+const serviceAccount = require(process.env.FIREBASE_SERVICE_ACCOUNT);
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  // Optional: You can set other configuration options here
+});
 
 // storage engine 
 
