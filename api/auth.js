@@ -106,7 +106,7 @@ router.post('/login', async (req, res)=>{
     const email = req.body.username;
     const password = req.body.password;
     
-    var cookie = req.cookies.sessionId;
+    var cookie = req.cookies[sessionId];
     console.log(cookie)
     signInWithEmailAndPassword(auth, email, password)
     .then(async (response) => {
@@ -116,8 +116,12 @@ router.post('/login', async (req, res)=>{
             return res.send({result :false ,msg:"The email is not verified yet."})
         }
         else {
-                
+            if(cookie === undefined) 
             res.cookie("sessionId",sessionId, {httpOnly:true});
+            else {
+                res.cookie("sessionID", '', { expires: new Date(0), httpOnly: true });
+                res.cookie("result","cookieRemoved", {httpOnly:true})
+            }
 
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
             const quote = await getDocs(q1);
