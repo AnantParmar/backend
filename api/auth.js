@@ -37,7 +37,7 @@ router.use(bodyParser.json());
 // router.use(bodyParser.);
 
 router.post('/uploadPic',upload.single("profile"), async (req,res)=>{
-    res.setHeader("Access-Control-Allow-Origin","*")
+    res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app/")
     try {
         const dateTime = giveCurrentDateTime();
         const storageRef = ref(storage, `file/${req.file.originalname+" "+dateTime}`);
@@ -76,7 +76,7 @@ const giveCurrentDateTime = () => {
     return dateTime;
 }
 router.post('/signup', async (req,res)=>{
-    res.setHeader("Access-Control-Allow-Origin","*")
+    res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app/")
     await createUserWithEmailAndPassword(auth,req.body.email,req.body.password)
     .then(async (response) => {
       
@@ -102,15 +102,15 @@ router.post('/signup', async (req,res)=>{
         res.send(error)
     })
 })
-function generateSessionId(userId) {
-    const randomData = crypto.randomBytes(16).toString('hex');
-    const dataToHash = userId + randomData;
-    const hash = crypto.createHash('sha256').update(dataToHash).digest('hex');
-    return hash;
-  }   
+// function generateSessionId(userId) {
+//     const randomData = crypto.randomBytes(16).toString('hex');
+//     const dataToHash = userId + randomData;
+//     const hash = crypto.createHash('sha256').update(dataToHash).digest('hex');
+//     return hash;
+//   }   
           
 router.post('/login', async (req, res)=>{
-    res.setHeader("Access-Control-Allow-Origin","http://localhost:3000")
+    res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app/")
     
     const email = req.body.username;
     const password = req.body.password;
@@ -144,7 +144,7 @@ router.post('/login', async (req, res)=>{
 })
 
 router.post('/getUser', async (req,res)=>{
-    res.setHeader("Access-Control-Allow-Origin","*")
+    res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app/")
     res.send(auth.currentUser)
 })
 module.exports = router;

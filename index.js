@@ -7,11 +7,9 @@
 app.use(cookieParser());
  app.use(bodyParser.urlencoded({ extended: false }))
 //  app.use(cors())
- app.use(cors({
-  origin: '*'
-}));
+
 app.use(cors({
-  origin: 'http://localhost:3000', // Replace with your frontend URL
+  origin: 'https://jigarii-frontend.vercel.app/', // Replace with your frontend URL
   credentials: true, // Allow sending cookies with the request (if needed)
 }));
  app.use('/profile', express.static('upload/img'));
@@ -20,7 +18,7 @@ app.use(cors({
   if(cookie!==undefined) {
     console.log(cookie);
   }
-  res.setHeader("Access-Control-Allow-Origin","*")
+  res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app/")
   res.send("Home");
  })
 
