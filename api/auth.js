@@ -13,7 +13,8 @@ router.use(cookieParser());
 const admin = require('firebase-admin');
 require('dotenv').config();
 // Initialize the Firebase Admin SDK with your service account credentials
-const serviceAccount = require(process.env.FIREBASE_SERVICE_ACCOUNT);
+const serviceAccountString = process.env.FIREBASE_SERVICE_ACCOUNT;
+const serviceAccount = JSON.parse(serviceAccountString)
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   // Optional: You can set other configuration options here
