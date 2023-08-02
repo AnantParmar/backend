@@ -74,7 +74,7 @@ const getQuotes = async (querySnapshot)=>{
     return responseArr;
 }
 router.get('/getQuotes', async (req,res) => {
-    res.setHeader("Access-Control-Allow-Origin","*")
+    res.setHeader("Access-Control-Allow-Origin","http://localhost:3000")
     const querySnapshot = await getDocs(collection(db, "quotes"));
     getQuotes(querySnapshot)
     .then((responseArr)=>{
