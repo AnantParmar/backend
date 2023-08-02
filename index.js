@@ -10,7 +10,6 @@ app.use(cookieParser());
 
 app.use(cors({
   origin: '*', // Replace with your frontend URL
-  credentials: true, // Allow sending cookies with the request (if needed)
 }));
  app.use('/profile', express.static('upload/img'));
  app.get('/', (req, res)=>{

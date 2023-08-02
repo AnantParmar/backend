@@ -102,12 +102,12 @@ router.post('/signup', async (req,res)=>{
         res.send(error)
     })
 })
-// function generateSessionId(userId) {
-//     const randomData = crypto.randomBytes(16).toString('hex');
-//     const dataToHash = userId + randomData;
-//     const hash = crypto.createHash('sha256').update(dataToHash).digest('hex');
-//     return hash;
-//   }   
+function generateSessionId(userId) {
+    const randomData = crypto.randomBytes(16).toString('hex');
+    const dataToHash = userId + randomData;
+    const hash = crypto.createHash('sha256').update(dataToHash).digest('hex');
+    return hash;
+  }   
           
 router.post('/login', async (req, res)=>{
     res.setHeader("Access-Control-Allow-Origin","*")
@@ -124,8 +124,9 @@ router.post('/login', async (req, res)=>{
         }
         else {
             const customToken = await admin.auth().createCustomToken(response.user.uid);
-            console.log(customToken)
+            // console.log(customToken)
             res.cookie("sessionId",customToken, {httpOnly:true});
+
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
             const quote = await getDocs(q1);
             var likedQuotesData = [];
