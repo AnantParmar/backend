@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const path = require('path');
+// const path = require('path');
 const {signInWithEmailAndPassword,createUserWithEmailAndPassword,updateProfile,sendEmailVerification} = require('firebase/auth')
 const {setDoc,collection,doc,query,getDocs,where} = require('firebase/firestore');
 const { ref, getDownloadURL, uploadBytesResumable } = require('firebase/storage');
@@ -13,11 +13,11 @@ router.use(cookieParser());
 const admin = require('firebase-admin');
 
 // Initialize the Firebase Admin SDK with your service account credentials
-const serviceAccount = require('../path/to/serviceAccountKey.json');
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  // Optional: You can set other configuration options here
-});
+// const serviceAccount = require('../path/to/serviceAccountKey.json');
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   // Optional: You can set other configuration options here
+// });
 
 // storage engine 
 
@@ -123,9 +123,9 @@ router.post('/login', async (req, res)=>{
             return res.send({result :false ,msg:"The email is not verified yet."})
         }
         else {
-            const customToken = await admin.auth().createCustomToken(response.user.uid);
+            // const customToken = await admin.auth().createCustomToken(response.user.uid);
             // console.log(customToken)
-            res.cookie("sessionId",customToken, {httpOnly:true});
+            // res.cookie("sessionId",customToken, {httpOnly:true});
 
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
             const quote = await getDocs(q1);
