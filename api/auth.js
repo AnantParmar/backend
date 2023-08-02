@@ -119,7 +119,7 @@ router.post('/login', async (req, res)=>{
             if(cookie === undefined) 
             res.cookie("sessionId",sessionId, {httpOnly:true});
             else {
-                res.cookie("sessionID", '', { expires: new Date(0), httpOnly: true });
+                // res.cookie("sessionID", '', { expires: new Date(0), httpOnly: true });
                 res.cookie("result","cookieRemoved", {httpOnly:true})
                 res.cookie("sessionId",sessionId, {httpOnly:true});
             }
