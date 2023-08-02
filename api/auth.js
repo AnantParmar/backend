@@ -10,6 +10,15 @@ const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser")
 const crypto = require("crypto");
 router.use(cookieParser());
+const admin = require('firebase-admin');
+
+// Initialize the Firebase Admin SDK with your service account credentials
+const serviceAccount = require('../path/to/serviceAccountKey.json');
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  // Optional: You can set other configuration options here
+});
+
 // storage engine 
 
 // const mulStorage = multer.diskStorage({
@@ -106,24 +115,17 @@ router.post('/login', async (req, res)=>{
     const email = req.body.username;
     const password = req.body.password;
     
-    var cookie = req.cookies.sessionId;
-    console.log(cookie)
+    // console.log(req)
+    // console.log(cookie)
     signInWithEmailAndPassword(auth, email, password)
     .then(async (response) => {
-        const sessionId = generateSessionId(response.user.uid);
-        console.log(sessionId)
         if(!response.user.emailVerified) {
             return res.send({result :false ,msg:"The email is not verified yet."})
         }
         else {
-            if(cookie === undefined) 
-            res.cookie("sessionId",sessionId, {httpOnly:true});
-            else {
-                // res.cookie("sessionID", '', { expires: new Date(0), httpOnly: true });
-                res.cookie("result","cookieRemoved", {httpOnly:true})
-                res.cookie("sessionId",sessionId, {httpOnly:true});
-            }
-
+            const customToken = await admin.auth().createCustomToken(response.user.uid);
+            console.log(customToken)
+            res.cookie("sessionId",customToken, {httpOnly:true});
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
             const quote = await getDocs(q1);
             var likedQuotesData = [];
