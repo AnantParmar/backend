@@ -9,7 +9,8 @@ app.use(cookieParser());
  app.use(cors())
 
 app.use(cors({
-  origin: '*', // Replace with your frontend URL
+  origin: '*',
+  credentials: true // Replace with your frontend URL
 }));
  app.use('/profile', express.static('upload/img'));
  app.get('/', (req, res)=>{
