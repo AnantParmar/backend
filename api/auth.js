@@ -130,7 +130,7 @@ router.post('/login', async (req, res)=>{
                 path: '/',
                 expires: new Date(Date.now() + 3600000), 
                 secure: true, 
-                httpOnly: true, 
+                // httpOnly: true, 
                 sameSite: 'strict', 
               });
 
