@@ -6,12 +6,13 @@
  const cookieParser = require("cookie-parser")
 app.use(cookieParser());
  app.use(bodyParser.urlencoded({ extended: false }))
- app.use(cors())
 
-app.use(cors({
-  origin: '*',
-  credentials: true // Replace with your frontend URL
-}));
+ const corsOptions = {
+  origin: 'http://your-frontend-domain.com', // Replace with your frontend URL
+  credentials: true, // Allow sending cookies
+};
+
+app.use(cors(corsOptions));
  app.use('/profile', express.static('upload/img'));
  app.get('/', (req, res)=>{
   var cookie = req.cookies.sessionId;
