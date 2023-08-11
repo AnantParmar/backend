@@ -111,7 +111,9 @@ function generateSessionId(userId) {
   }   
           
 router.post('/login', async (req, res)=>{
-    res.setHeader("Access-Control-Allow-Origin","*")
+    res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
+    res.setHeader("Access-Control-Allow-Methods", "POST");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log('login '+req.cookies.sessionId)
     const email = req.body.username;
     const password = req.body.password;
@@ -128,7 +130,10 @@ router.post('/login', async (req, res)=>{
             console.log(customToken)
 
             res.cookie('sessionId',"xyz", {
-                sameSite: 'none'
+                sameSite: 'none',
+                secure: 'true',
+                httpOnly: 'true',
+                maxAge: 7 * 24 * 60 * 60 * 1000,
             });
             // res.setHeader('set-cookie', "a=b");
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
