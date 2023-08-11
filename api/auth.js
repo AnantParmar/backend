@@ -112,7 +112,7 @@ function generateSessionId(userId) {
           
 router.post('/login', async (req, res)=>{
     // res.setHeader("Access-Control-Allow-Origin","*")
-    console.log(`login log ${req.cookies}`)
+    console.log(req.cookies.sessionId)
     const email = req.body.username;
     const password = req.body.password;
     
