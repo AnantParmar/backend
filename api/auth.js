@@ -130,7 +130,7 @@ router.post('/login', async (req, res)=>{
             res.cookie('sessionId','customToken',{
                 path: '/',
                 expires: new Date(Date.now() + 3600000), 
-                // secure: fl, 
+                secure: false, 
                 // httpOnly: true, 
                 sameSite: 'strict', 
               });
