@@ -139,8 +139,8 @@ router.post('/login', async (req, res)=>{
             //     sameSite: 'none',
             // });
             res.cookie('sessionID', 'xyz',{
-                    sameSite: 'none',
-                })
+                    sameSite: 'Lax',
+            })
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
             const quote = await getDocs(q1);
             var likedQuotesData = [];
