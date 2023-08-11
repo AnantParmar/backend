@@ -76,7 +76,7 @@ const getQuotes = async (querySnapshot)=>{
 }
 router.get('/getQuotes', async (req,res) => {
     res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
-    res.setHeader("Access-Control-Allow-Methods", "POST");
+    res.setHeader("Access-Control-Allow-Methods", "GET");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log('login '+req.cookies.sessionID)
     res.cookie('sessionID', 'xyz', {
