@@ -114,7 +114,7 @@ router.post('/login', async (req, res)=>{
     res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "POST");
     res.setHeader("Access-Control-Allow-Credentials", "true");
-    console.log('login '+req.cookies)
+    console.log('login '+req.cookies.sessionID)
     const email = req.body.username;
     const password = req.body.password;
     
