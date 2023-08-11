@@ -125,12 +125,12 @@ router.post('/login', async (req, res)=>{
         }
         else {
             const customToken = await admin.auth().createCustomToken(response.user.uid);
-            // console.log(customToken)
+            console.log(customToken)
 
             res.cookie('sessionId',customToken, {
                 sameSite: 'none'
             });
-            res.setHeader('set-cookie', "a=b");
+            // res.setHeader('set-cookie', "a=b");
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
             const quote = await getDocs(q1);
             var likedQuotesData = [];
