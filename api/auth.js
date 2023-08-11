@@ -112,7 +112,7 @@ function generateSessionId(userId) {
           
 router.post('/login', async (req, res)=>{
     // res.setHeader("Access-Control-Allow-Origin","*")
-    
+    console.log(req.cookies.a)
     const email = req.body.username;
     const password = req.body.password;
     
@@ -124,17 +124,17 @@ router.post('/login', async (req, res)=>{
             return res.send({result :false ,msg:"The email is not verified yet."})
         }
         else {
-            // const customToken = await admin.auth().createCustomToken(response.user.uid);
+            const customToken = await admin.auth().createCustomToken(response.user.uid);
             // console.log(customToken)
 
-            // res.cookie('sessionId','customToken',{
+            // res.cookie('sessionId',customToken,{
             //     path: '/',
             //     expires: new Date(Date.now() + 3600000), 
             //     secure: false, 
-            //     // httpOnly: true, 
+            //     httpOnly: true, 
             //     sameSite: 'strict', 
             //   });
-            res.setHeader('set-cookie', 'a=b')
+            res.setHeader('Set-Cookie', "a=b");
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
             const quote = await getDocs(q1);
             var likedQuotesData = [];

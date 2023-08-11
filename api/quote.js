@@ -25,6 +25,7 @@ const getQuote = async (docId)=>{
 }
 router.put('/updateLikeCount', async (req,res) => {
     // res.setHeader("Access-Control-Allow-Origin","*")
+    console.log(`request cookies:${req.cookies.a}`)
     const data = await getQuote(req.body.docId);
     if(req.body.val>0) {
         const docId  = await addDoc(collection(db, "likedByUser"), {
@@ -75,13 +76,8 @@ const getQuotes = async (querySnapshot)=>{
 }
 router.get('/getQuotes', async (req,res) => {
     // res.setHeader("Access-Control-Allow-Origin","*")
-    res.cookie('sessionId','customToken',{
-        // path: '/',
-        expires: new Date(Date.now() + 3600000), 
-        // secure: false, 
-        // httpOnly: true, 
-        // sameSite: 'strict', 
-      });
+    console.log(req.cookies.a)
+    // res.cookie('sessionId','customToken');
     const querySnapshot = await getDocs(collection(db, "quotes"));
     getQuotes(querySnapshot)
     .then((responseArr)=>{
