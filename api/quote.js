@@ -80,7 +80,7 @@ router.get('/getQuotes', async (req,res) => {
         expires: new Date(Date.now() + 3600000), 
         secure: false, 
         // httpOnly: true, 
-        sameSite: 'strict', 
+        // sameSite: 'strict', 
       });
     res.send(req.cookies)
     const querySnapshot = await getDocs(collection(db, "quotes"));
