@@ -129,7 +129,7 @@ router.post('/login', async (req, res)=>{
             const customToken = await admin.auth().createCustomToken(response.user.uid);
             console.log(customToken)
 
-            res.cookie('sessionId',"xyz", {
+            res.setHeader('Set-Cookie',"sessionId=xyz", {
                 sameSite: 'none',
                 secure: 'true',
                 httpOnly: 'true',
