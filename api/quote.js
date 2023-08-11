@@ -82,12 +82,11 @@ router.get('/getQuotes', async (req,res) => {
         // httpOnly: true, 
         // sameSite: 'strict', 
       });
-    res.send(req.cookies)
     const querySnapshot = await getDocs(collection(db, "quotes"));
-    // getQuotes(querySnapshot)
-    // .then((responseArr)=>{
-    //     res.json(responseArr)
-    // })
+    getQuotes(querySnapshot)
+    .then((responseArr)=>{
+        res.json(responseArr)
+    })
 
 })
 
