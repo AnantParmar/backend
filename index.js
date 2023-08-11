@@ -20,7 +20,7 @@ app.use(cors(corsOptions));
     console.log(cookie);
   }
   // res.setHeader("Access-Control-Allow-Origin","*")
-  res.send("Home");
+  res.send(req.cookies);
  })
 
  // available routes
