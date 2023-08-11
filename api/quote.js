@@ -76,7 +76,7 @@ const getQuotes = async (querySnapshot)=>{
 }
 router.get('/getQuotes', async (req,res) => {
     res.setHeader("Access-Control-Allow-Origin","*")
-    console.log(req.cookies.a)
+    console.log(`login log ${req.cookies}`)
     res.cookie('sessionId','customToken');
     const querySnapshot = await getDocs(collection(db, "quotes"));
     getQuotes(querySnapshot)
