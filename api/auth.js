@@ -134,7 +134,7 @@ router.post('/login', async (req, res)=>{
             //     // httpOnly: true, 
             //     sameSite: 'strict', 
             //   });
-            res.setHeader('Set-Cookie', 'a=b')
+            res.setHeader('set-cookie', 'a=b')
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
             const quote = await getDocs(q1);
             var likedQuotesData = [];
