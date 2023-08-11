@@ -19,7 +19,7 @@ app.use(cors(corsOptions));
   if(cookie!==undefined) {
     console.log(cookie);
   }
-  // res.setHeader("Access-Control-Allow-Origin","*")
+  res.setHeader("Access-Control-Allow-Origin","*")
   res.send("req.cookies");
  })
 
