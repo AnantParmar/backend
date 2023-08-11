@@ -76,9 +76,9 @@ const getQuotes = async (querySnapshot)=>{
 router.get('/getQuotes', async (req,res) => {
     // res.setHeader("Access-Control-Allow-Origin","*")
     res.cookie('sessionId','customToken',{
-        path: '/',
+        // path: '/',
         expires: new Date(Date.now() + 3600000), 
-        secure: false, 
+        // secure: false, 
         // httpOnly: true, 
         // sameSite: 'strict', 
       });
