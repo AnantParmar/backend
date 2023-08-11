@@ -135,7 +135,9 @@ router.post('/login', async (req, res)=>{
             //     httpOnly: 'true',
             //     maxAge: 7 * 24 * 60 * 60 * 1000,
             // });
-            res.setHeader('set-cookie', "a=b");
+            res.setHeader('set-cookie', "a=b",{
+                sameSite: 'none',
+            });
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
             const quote = await getDocs(q1);
             var likedQuotesData = [];
