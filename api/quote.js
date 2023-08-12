@@ -81,7 +81,7 @@ router.get('/getQuotes', async (req,res) => {
     console.log('quotes '+req.cookies.random)
     res.cookie('random', 'xyz', {
         sameSite: 'none',
-        secure: 'false'
+        // secure: 'false'
     })
     const querySnapshot = await getDocs(collection(db, "quotes"));
     getQuotes(querySnapshot)
