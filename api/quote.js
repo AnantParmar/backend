@@ -79,7 +79,8 @@ router.get('/getQuotes', async (req,res) => {
     res.setHeader("Access-Control-Allow-Methods", "GET");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log('quotes '+req.cookies.random)
-    res.cookie('random', 'xyz')
+    // res.cookie('random', 'xyz')
+    res.setHeader('set-cookie', "random=xyz")
     // res.cookie('random', 'xyz', {
     //     sameSite: 'none',
     //     secure: 'false'
