@@ -79,10 +79,11 @@ router.get('/getQuotes', async (req,res) => {
     res.setHeader("Access-Control-Allow-Methods", "GET");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log('quotes '+req.cookies.random)
-    res.cookie('random', 'xyz', {
-        // sameSite: 'none',
-        secure: 'false'
-    })
+    res.cookie('random', 'xyz')
+    // res.cookie('random', 'xyz', {
+    //     sameSite: 'none',
+    //     secure: 'false'
+    // })
     const querySnapshot = await getDocs(collection(db, "quotes"));
     getQuotes(querySnapshot)
     .then((responseArr)=>{
