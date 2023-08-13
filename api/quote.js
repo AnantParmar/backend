@@ -97,7 +97,7 @@ router.get('/getQuotes', async (req,res) => {
     })
 
 })
-router.get('/getLikedCount', async (req,res)=>{
+router.post('/getLikedCount', async (req,res)=>{
     const q1 = query(collection(db, "likedByUser"), where("user", "==", req.body.uid));
     const quote = await getDocs(q1);
     var likedQuotesData = [];
