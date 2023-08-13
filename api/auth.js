@@ -133,7 +133,7 @@ router.post('/login', async (req, res)=>{
             //     sameSite: 'none',
             //     secure: 'false'
             // })
-            
+
             // res.setHeader('set-cookie',"sessionId=xyz", {
             //     sameSite: 'none',
             //     secure: 'true',
@@ -154,7 +154,7 @@ router.post('/login', async (req, res)=>{
                 const docData = docd.data()
                 likedQuotesData.push(docData);
             }
-            return res.send({result:true,data:response,likedQuotesData:likedQuotesData,customeToken: customToken});
+            return res.send({result:true,data:response,likedQuotesData:likedQuotesData,customToken: customToken});
         }
     })
     .catch((error) => {
