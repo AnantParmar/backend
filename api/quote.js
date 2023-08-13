@@ -82,7 +82,7 @@ router.get('/getQuotes', async (req,res) => {
     // res.cookie('random', 'xyz')
     res.cookie('customtoken', "xyzByxjnsjd", {
         secure: true, // Set this to true for HTTPS
-        httpOnly: true,
+        httpOnly: false,
         sameSite: 'None', // Set this for cross-site requests
       });
     // res.cookie('random', 'xyz', {
