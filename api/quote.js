@@ -80,7 +80,11 @@ router.get('/getQuotes', async (req,res) => {
     res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log('quotes '+req.cookies.random)
     // res.cookie('random', 'xyz')
-    res.setHeader('Set-Cookie', 'random=xyz; Secure; SameSite=None')
+    res.cookie('customtoken', "xyzByxjnsjd", {
+        secure: true, // Set this to true for HTTPS
+        httpOnly: true,
+        sameSite: 'None', // Set this for cross-site requests
+      });
     // res.cookie('random', 'xyz', {
     //     sameSite: 'none',
     //     secure: 'false'
