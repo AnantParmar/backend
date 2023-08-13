@@ -78,7 +78,7 @@ router.get('/getQuotes', async (req,res) => {
     res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "GET");
     res.setHeader("Access-Control-Allow-Credentials", "true");
-    console.log('quotes '+req.cookies.random)
+    console.log('quotes '+req.cookies.customtoken)
     // res.cookie('random', 'xyz')
     res.cookie('customtoken', "xyzByxjnsjd", {
         secure: true, // Set this to true for HTTPS
