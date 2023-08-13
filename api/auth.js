@@ -128,10 +128,12 @@ router.post('/login', async (req, res)=>{
         else {
             const customToken = await admin.auth().createCustomToken(response.user.uid);
             // console.log(customToken)
-            res.cookie('sessionID', customToken, {
-                sameSite: 'none',
-                secure: 'false'
-            })
+
+            // res.cookie('sessionID', customToken, {
+            //     sameSite: 'none',
+            //     secure: 'false'
+            // })
+            
             // res.setHeader('set-cookie',"sessionId=xyz", {
             //     sameSite: 'none',
             //     secure: 'true',
@@ -152,7 +154,7 @@ router.post('/login', async (req, res)=>{
                 const docData = docd.data()
                 likedQuotesData.push(docData);
             }
-            return res.send({result:true,data:response,likedQuotesData:likedQuotesData});
+            return res.send({result:true,data:response,likedQuotesData:likedQuotesData,customeToken: customToken});
         }
     })
     .catch((error) => {
