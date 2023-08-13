@@ -81,7 +81,7 @@ router.get('/getQuotes', async (req,res) => {
     console.log('quotes '+req.cookies.customtoken)
     // res.cookie('random', 'xyz')
     res.cookie('customtoken', "xyzByxjnsjd", {
-        domain: '.jigarii-frontend.vercel.app',
+        domain: '.backend-kappa-murex.vercel.app',
         secure: true, // Set this to true for HTTPS
         httpOnly: false,
         sameSite: 'None', // Set this for cross-site requests
