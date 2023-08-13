@@ -97,5 +97,15 @@ router.get('/getQuotes', async (req,res) => {
     })
 
 })
-
+router.get('/getLikedCount', async (req,res)=>{
+    const q1 = query(collection(db, "likedByUser"), where("user", "==", req.body.uid));
+    const quote = await getDocs(q1);
+    var likedQuotesData = [];
+    for (let index = 0; index < quote.docs.length; index++) {
+        const docd = quote.docs[index];
+        const docData = docd.data()
+        likedQuotesData.push(docData);
+    }
+    res.json(likedQuotesData)
+})
 module.exports = router;

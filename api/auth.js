@@ -109,7 +109,7 @@ function generateSessionId(userId) {
     const hash = crypto.createHash('sha256').update(dataToHash).digest('hex');
     return hash;
   }   
-          
+        
 router.post('/login', async (req, res)=>{
     res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "POST");
