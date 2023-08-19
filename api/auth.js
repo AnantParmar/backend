@@ -78,6 +78,7 @@ const giveCurrentDateTime = () => {
 }
 router.post('/signup', async (req,res)=>{
     // res.setHeader("Access-Control-Allow-Origin","*")
+    res.setHeader("Access-Control-Allow-Origin","*")
     await createUserWithEmailAndPassword(auth,req.body.email,req.body.password)
     .then(async (response) => {
       
@@ -111,7 +112,8 @@ function generateSessionId(userId) {
   }   
         
 router.post('/login', async (req, res)=>{
-    res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
+    // res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "POST");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log('login '+req.cookies.sessionID)
@@ -127,25 +129,6 @@ router.post('/login', async (req, res)=>{
         }
         else {
             const customToken = await admin.auth().createCustomToken(response.user.uid);
-            // console.log(customToken)
-
-            // res.cookie('sessionID', customToken, {
-            //     sameSite: 'none',
-            //     secure: 'false'
-            // })
-
-            // res.setHeader('set-cookie',"sessionId=xyz", {
-            //     sameSite: 'none',
-            //     secure: 'true',
-            //     httpOnly: 'true',
-            //     maxAge: 7 * 24 * 60 * 60 * 1000,
-            // });
-            // res.setHeader('set-cookie', "a=b",{
-            //     sameSite: 'none',
-            // });
-            // res.cookie('sessionID', 'xyz',{
-            //         sameSite: 'Lax',
-            // })
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
             const quote = await getDocs(q1);
             var likedQuotesData = [];
