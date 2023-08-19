@@ -38,7 +38,7 @@ router.use(bodyParser.json());
 // router.use(bodyParser.);
 
 router.post('/uploadPic',upload.single("profile"), async (req,res)=>{
-    // res.setHeader("Access-Control-Allow-Origin","*")
+    res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app")
     try {
         const dateTime = giveCurrentDateTime();
         const storageRef = ref(storage, `file/${req.file.originalname+" "+dateTime}`);
@@ -77,8 +77,7 @@ const giveCurrentDateTime = () => {
     return dateTime;
 }
 router.post('/signup', async (req,res)=>{
-    // res.setHeader("Access-Control-Allow-Origin","*")
-    res.setHeader("Access-Control-Allow-Origin","*")
+    res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app")
     await createUserWithEmailAndPassword(auth,req.body.email,req.body.password)
     .then(async (response) => {
       
@@ -112,8 +111,7 @@ function generateSessionId(userId) {
   }   
         
 router.post('/login', async (req, res)=>{
-    // res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "POST");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log('login '+req.cookies.sessionID)
@@ -147,7 +145,7 @@ router.post('/login', async (req, res)=>{
 })
 
 router.post('/getUser', async (req,res)=>{
-    // res.setHeader("Access-Control-Allow-Origin","*")
+    res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app")
     res.send(auth.currentUser)
 })
 module.exports = router;
