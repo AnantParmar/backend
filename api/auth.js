@@ -38,7 +38,9 @@ router.use(bodyParser.json());
 // router.use(bodyParser.);
 
 router.post('/uploadPic',upload.single("profile"), async (req,res)=>{
-    res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app")
+    res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
+    res.setHeader("Access-Control-Allow-Methods", "POST");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log(`upload Pic request cookies:${req.cookies.customToken}`)
     try {
         const dateTime = giveCurrentDateTime();
@@ -128,7 +130,7 @@ router.post('/login', async (req, res)=>{
         }
         else {
             const customToken = await admin.auth().createCustomToken(response.user.uid);
-            res.cookie('customtoken', customToken, {
+            res.cookie('customToken', customToken, {
                 domain: '.backend-kappa-murex.vercel.app',
                 secure: true, 
                 httpOnly: false,
