@@ -136,7 +136,8 @@ router.post('/login', async (req, res)=>{
                 domain: '.backend-kappa-murex.vercel.app',
                 secure: true, 
                 httpOnly: false,
-                sameSite: 'None', 
+                sameSite: 'None',
+                expires: new Date().getTime() + 350*24*3600 
             });
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
             const quote = await getDocs(q1);
@@ -156,7 +157,7 @@ router.post('/login', async (req, res)=>{
 })
 router.get('/logout', async (req, res)=>{
     res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
-    res.setHeader("Access-Control-Allow-Methods", "POST");
+    res.setHeader("Access-Control-Allow-Methods", "GET");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log('logout '+req.cookies.customToken)
     res.cookie('customToken', '', { expires: new Date(0) });
