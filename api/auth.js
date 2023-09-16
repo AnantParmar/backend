@@ -39,6 +39,7 @@ router.use(bodyParser.json());
 
 router.post('/uploadPic',upload.single("profile"), async (req,res)=>{
     res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app")
+    console.log(`upload Pic request cookies:${req.cookies}`)
     try {
         const dateTime = giveCurrentDateTime();
         const storageRef = ref(storage, `file/${req.file.originalname+" "+dateTime}`);
@@ -108,7 +109,7 @@ function generateSessionId(userId) {
     const dataToHash = userId + randomData;
     const hash = crypto.createHash('sha256').update(dataToHash).digest('hex');
     return hash;
-  }   
+}   
         
 router.post('/login', async (req, res)=>{
     res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
@@ -127,6 +128,12 @@ router.post('/login', async (req, res)=>{
         }
         else {
             const customToken = await admin.auth().createCustomToken(response.user.uid);
+            res.cookie('customtoken', customToken, {
+                domain: '.backend-kappa-murex.vercel.app',
+                secure: true, 
+                httpOnly: false,
+                sameSite: 'None', 
+            });
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
             const quote = await getDocs(q1);
             var likedQuotesData = [];
