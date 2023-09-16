@@ -11,6 +11,8 @@ router.use(bodyParser.json());
 router.post('/addQuote', async (req,res) => {
     res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app")
     console.log(`add quote request cookies:${req.cookies.customToken}`)
+    if(req.cookies.customToken=== undefined)
+    return res.status(401).send({message:"Unauthorized"})
     const docId  = await addDoc(collection(db, "quotes"), {
         tag: req.body.quoteTag,
         quote: req.body.quote,
@@ -27,6 +29,8 @@ const getQuote = async (docId)=>{
 router.put('/updateLikeCount', async (req,res) => {
     res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app")
     console.log(`update like count request cookies:${req.cookies.customToken}`)
+    if(req.cookies.customToken=== undefined)
+    return res.status(401).send({message:"Unauthorized"})
     const data = await getQuote(req.body.docId);
     if(req.body.val>0) {
         const docId  = await addDoc(collection(db, "likedByUser"), {
@@ -95,7 +99,10 @@ router.get('/getQuotes', async (req,res) => {
 })
 router.post('/getLikedCount', async (req,res)=>{
     console.log(`get like count request cookies:${req.cookies.customtoken}`)
+    if(req.cookies.customToken=== undefined)
+    return res.status(401).send({message:"Unauthorized"})
     const q1 = query(collection(db, "likedByUser"), where("user", "==", req.body.uid));
+
     const quote = await getDocs(q1);
     var likedQuotesData = [];
     for (let index = 0; index < quote.docs.length; index++) {

@@ -42,6 +42,8 @@ router.post('/uploadPic',upload.single("profile"), async (req,res)=>{
     res.setHeader("Access-Control-Allow-Methods", "POST");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log(`upload Pic request cookies:${req.cookies.customToken}`)
+    if(req.cookies.customToken=== undefined)
+    return res.status(401).send({message:"Unauthorized"})
     try {
         const dateTime = giveCurrentDateTime();
         const storageRef = ref(storage, `file/${req.file.originalname+" "+dateTime}`);
@@ -154,7 +156,11 @@ router.post('/login', async (req, res)=>{
 })
 
 router.post('/getUser', async (req,res)=>{
-    res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app")
+    res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
+    res.setHeader("Access-Control-Allow-Methods", "POST");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    if(req.cookies.customToken=== undefined)
+    return res.status(401).send({message:"Unauthorized"})
     res.send(auth.currentUser)
 })
 module.exports = router;
