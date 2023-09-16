@@ -10,7 +10,7 @@ router.use(bodyParser.json());
 
 router.post('/addQuote', async (req,res) => {
     res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app")
-    console.log(`add quote request cookies:${req.cookies}`)
+    console.log(`add quote request cookies:${req.cookies.customtoken}`)
     const docId  = await addDoc(collection(db, "quotes"), {
         tag: req.body.quoteTag,
         quote: req.body.quote,
@@ -26,7 +26,7 @@ const getQuote = async (docId)=>{
 }
 router.put('/updateLikeCount', async (req,res) => {
     res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app")
-    console.log(`update like count request cookies:${req.cookies}`)
+    console.log(`update like count request cookies:${req.cookies.customtoken}`)
     const data = await getQuote(req.body.docId);
     if(req.body.val>0) {
         const docId  = await addDoc(collection(db, "likedByUser"), {
@@ -80,17 +80,12 @@ router.get('/getQuotes', async (req,res) => {
     res.setHeader("Access-Control-Allow-Methods", "GET");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log('quotes '+req.cookies.customtoken)
-    // res.cookie('random', 'xyz')
-    res.cookie('customtoken', "xyzByxjnsjd", {
-        domain: '.backend-kappa-murex.vercel.app',
-        secure: true, // Set this to true for HTTPS
-        httpOnly: false,
-        sameSite: 'None', // Set this for cross-site requests
-      });
-    // res.cookie('random', 'xyz', {
-    //     sameSite: 'none',
-    //     secure: 'false'
-    // })
+    // res.cookie('customtoken', "xyzByxjnsjd", {
+    //     domain: '.backend-kappa-murex.vercel.app',
+    //     secure: true, // Set this to true for HTTPS
+    //     httpOnly: false,
+    //     sameSite: 'None', // Set this for cross-site requests
+    //   });
     const querySnapshot = await getDocs(collection(db, "quotes"));
     getQuotes(querySnapshot)
     .then((responseArr)=>{
@@ -99,7 +94,7 @@ router.get('/getQuotes', async (req,res) => {
 
 })
 router.post('/getLikedCount', async (req,res)=>{
-    console.log(`get like count request cookies:${req.cookies}`)
+    console.log(`get like count request cookies:${req.cookies.customtoken}`)
     const q1 = query(collection(db, "likedByUser"), where("user", "==", req.body.uid));
     const quote = await getDocs(q1);
     var likedQuotesData = [];

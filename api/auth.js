@@ -39,7 +39,7 @@ router.use(bodyParser.json());
 
 router.post('/uploadPic',upload.single("profile"), async (req,res)=>{
     res.setHeader("Access-Control-Allow-Origin","https://jigarii-frontend.vercel.app")
-    console.log(`upload Pic request cookies:${req.cookies}`)
+    console.log(`upload Pic request cookies:${req.cookies.customToken}`)
     try {
         const dateTime = giveCurrentDateTime();
         const storageRef = ref(storage, `file/${req.file.originalname+" "+dateTime}`);
@@ -115,7 +115,7 @@ router.post('/login', async (req, res)=>{
     res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "POST");
     res.setHeader("Access-Control-Allow-Credentials", "true");
-    console.log('login '+req.cookies.sessionID)
+    console.log('login '+req.cookies.customToken)
     const email = req.body.username;
     const password = req.body.password;
     
