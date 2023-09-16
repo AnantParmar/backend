@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-const {signInWithEmailAndPassword,createUserWithEmailAndPassword,updateProfile,sendEmailVerification} = require('firebase/auth')
+const {signInWithEmailAndPassword,createUserWithEmailAndPassword,updateProfile,sendEmailVerification,signOut} = require('firebase/auth')
 const {setDoc,collection,doc,query,getDocs,where} = require('firebase/firestore');
 const { ref, getDownloadURL, uploadBytesResumable } = require('firebase/storage');
 const {auth,storage,db} = require('../config.js')
@@ -154,7 +154,19 @@ router.post('/login', async (req, res)=>{
     });
     
 })
+router.get('/logout', async (req, res)=>{
+    res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
+    res.setHeader("Access-Control-Allow-Methods", "POST");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    console.log('logout '+req.cookies.customToken)
+    res.cookie('customToken', '', { expires: new Date(0) });
 
+    signOut(auth).then(() => {
+        return res.send({message : "Success"});
+    }).catch((error) => {
+        return res.send({message : error.message});
+    });
+})
 router.post('/getUser', async (req,res)=>{
     res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
     res.setHeader("Access-Control-Allow-Methods", "POST");
