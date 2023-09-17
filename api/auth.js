@@ -162,7 +162,7 @@ router.get('/logout', async (req, res)=>{
     res.setHeader("Access-Control-Allow-Methods", "GET");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log('logout '+req.cookies.customToken)
-    res.cookie('customToken', '', { expires: new Date(0) });
+    res.clearCookie('customToken')
 
     signOut(auth).then(() => {
         return res.send({message : "Success"});
