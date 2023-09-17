@@ -123,7 +123,7 @@ router.post('/login', async (req, res)=>{
     const email = req.body.username;
     const password = req.body.password;
     
-    // console.log(req)
+    console.log(email + " " +password)
     // console.log(cookie)
     signInWithEmailAndPassword(auth, email, password)
     .then(async (response) => {
