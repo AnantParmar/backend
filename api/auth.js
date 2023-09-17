@@ -133,7 +133,7 @@ router.post('/login', async (req, res)=>{
         else {
             const customToken = await admin.auth().createCustomToken(response.user.uid);
             const expirationDate = new Date();
-            expirationDate.setDate(expirationDate.getDate() + 350);
+            expirationDate.setDate(expirationDate.getDate() + 30);
             res.cookie('customToken', customToken, {
                 domain: '.backend-kappa-murex.vercel.app',
                 secure: true, 
@@ -162,7 +162,7 @@ router.get('/logout', async (req, res)=>{
     res.setHeader("Access-Control-Allow-Methods", "GET");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log('logout '+req.cookies.customToken)
-    res.clearCookie('customToken')
+    res.clearCookie('customToken',{ path: '/' })
 
     signOut(auth).then(() => {
         return res.send({message : "Success"});
