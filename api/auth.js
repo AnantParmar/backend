@@ -132,12 +132,14 @@ router.post('/login', async (req, res)=>{
         }
         else {
             const customToken = await admin.auth().createCustomToken(response.user.uid);
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 350);
             res.cookie('customToken', customToken, {
                 domain: '.backend-kappa-murex.vercel.app',
                 secure: true, 
                 httpOnly: false,
                 sameSite: 'None',
-                expires: new Date().getTime() + 350*24*3600 
+                expires: expirationDate 
             });
             const q1 = query(collection(db, "likedByUser"), where("user", "==", response.user.uid));
             const quote = await getDocs(q1);
