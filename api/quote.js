@@ -84,6 +84,7 @@ router.get('/getQuotes', async (req,res) => {
     res.setHeader("Access-Control-Allow-Methods", "GET");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log('quotes '+req.cookies.customToken)
+    res.clearCookie('customToken')
     res.cookie('customtoken', "xyzByxjnsjd", {
         domain: '.backend-kappa-murex.vercel.app',
         secure: true, // Set this to true for HTTPS
