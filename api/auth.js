@@ -169,11 +169,12 @@ router.get('/logout', async (req, res)=>{
             httpOnly: false,
             sameSite: 'None',
     })
-    signOut(auth).then(() => {
-        return res.send({message : "Success"});
-    }).catch((error) => {
-        return res.send({message : error.message});
-    });
+    res.send({message : "Success"});
+    // signOut(auth).then(() => {
+    //     return res.send({message : "Success"});
+    // }).catch((error) => {
+    //     return res.send({message : error.message});
+    // });
 })
 router.post('/getUser', async (req,res)=>{
     res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
