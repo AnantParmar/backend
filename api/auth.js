@@ -164,17 +164,13 @@ router.get('/logout', async (req, res)=>{
     console.log('logout '+req.cookies.customToken)
     res.clearCookie('customToken')
     res.cookie('abc',"hjkrfhdjf",{
-            domain: '.backend-kappa-murex.vercel.app',
-            secure: true, 
-            httpOnly: false,
-            sameSite: 'None',
+        domain: '.backend-kappa-murex.vercel.app',
+        secure: true, 
+        httpOnly: false,
+        sameSite: 'None',
     })
     res.send({message : "Success"});
-    // signOut(auth).then(() => {
-    //     return res.send({message : "Success"});
-    // }).catch((error) => {
-    //     return res.send({message : error.message});
-    // });
+    
 })
 router.post('/getUser', async (req,res)=>{
     res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");

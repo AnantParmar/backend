@@ -84,12 +84,12 @@ router.get('/getQuotes', async (req,res) => {
     res.setHeader("Access-Control-Allow-Methods", "GET");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log('quotes '+req.cookies.customToken)
-    // res.cookie('customtoken', "xyzByxjnsjd", {
-    //     domain: '.backend-kappa-murex.vercel.app',
-    //     secure: true, // Set this to true for HTTPS
-    //     httpOnly: false,
-    //     sameSite: 'None', // Set this for cross-site requests
-    //   });
+    res.cookie('customtoken', "xyzByxjnsjd", {
+        domain: '.backend-kappa-murex.vercel.app',
+        secure: true, // Set this to true for HTTPS
+        httpOnly: false,
+        sameSite: 'None', // Set this for cross-site requests
+      });
     const querySnapshot = await getDocs(collection(db, "quotes"));
     getQuotes(querySnapshot)
     .then((responseArr)=>{
