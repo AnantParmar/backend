@@ -162,12 +162,7 @@ router.get('/logout', async (req, res)=>{
     res.setHeader("Access-Control-Allow-Methods", "GET");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     console.log('logout '+req.cookies.customToken)
-    res.clearCookie('customToken',{
-        domain: '.backend-kappa-murex.vercel.app',
-        secure: true,
-        httpOnly: false,
-        sameSite: 'None',
-      })
+    res.clearCookie('customToken')
 
     signOut(auth).then(() => {
         return res.send({message : "Success"});
