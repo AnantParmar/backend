@@ -170,7 +170,7 @@ router.get('/logout', async (req, res)=>{
         sameSite: 'None',
     })
     res.send({message : "Success"});
-    res.redirect('/loging')
+    res.redirect('/login')
 })
 router.post('/getUser', async (req,res)=>{
     res.setHeader("Access-Control-Allow-Origin", "https://jigarii-frontend.vercel.app");
